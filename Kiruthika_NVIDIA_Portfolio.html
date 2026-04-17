@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiruthika Venkatesan — Software Product Manager, HPC Infrastructure</title>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --surface: #161616;
+    --surface2: #1e1e1e;
+    --green: #76b900;
+    --green-dim: rgba(118,185,0,0.1);
+    --green-glow: rgba(118,185,0,0.2);
+    --white: #f0f0f0;
+    --muted: #888;
+    --border: rgba(255,255,255,0.07);
+    --border-green: rgba(118,185,0,0.25);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--green); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem; height: 58px;
+    background: rgba(13,13,13,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--green); text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a {
+    font-family: 'Roboto Mono', monospace;
+    text-decoration: none; color: var(--muted);
+    font-size: 0.7rem; letter-spacing: 0.1em;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+
+  .nav-cta {
+    color: var(--bg) !important;
+    background: var(--green) !important;
+    padding: 6px 16px; font-weight: 600 !important;
+    transition: opacity 0.2s !important;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh; padding-top: 58px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    position: relative; overflow: hidden;
+  }
+
+  /* Circuit board pattern overlay */
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(118,185,0,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(118,185,0,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+  }
+
+  /* Green glow orb */
+  #hero::after {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(118,185,0,0.08) 0%, transparent 70%);
+    top: 20%; right: 10%;
+    pointer-events: none;
+  }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 3rem 5rem 3rem;
+    position: relative; z-index: 1;
+  }
+
+  .hero-tag {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.68rem; color: var(--green);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-tag::before { content: '▶'; font-size: 0.5rem; }
+
+  h1 {
+    font-family: 'Oxanium', sans-serif;
+    font-size: clamp(3.5rem, 6vw, 6.5rem);
+    font-weight: 800; line-height: 0.95;
+    letter-spacing: -0.02em; color: var(--white);
+    margin-bottom: 1.75rem;
+  }
+  h1 .g { color: var(--green); }
+  h1 .dim { color: #444; }
+
+  .hero-desc {
+    font-size: 0.95rem; color: var(--muted);
+    max-width: 460px; line-height: 1.85; margin-bottom: 2.5rem;
+  }
+  .hero-desc strong { color: var(--white); font-weight: 500; }
+
+  .hero-btns { display: flex; gap: 0.75rem; }
+
+  .btn-green {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; color: var(--bg);
+    background: var(--green); padding: 11px 24px;
+    transition: opacity 0.2s; font-weight: 600;
+  }
+  .btn-green:hover { opacity: 0.85; }
+
+  .btn-border {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; color: var(--white);
+    border: 1px solid var(--border); padding: 11px 24px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-border:hover { border-color: var(--green); color: var(--green); }
+
+  /* BCM MOCK DASHBOARD — hero right */
+  .hero-right {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 4rem 3rem 4rem 2rem;
+    position: relative; z-index: 1;
+  }
+
+  .bcm-mock {
+    background: var(--surface);
+    border: 1px solid var(--border-green);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(118,185,0,0.06), 0 4px 24px rgba(0,0,0,0.4);
+  }
+
+  .bcm-titlebar {
+    background: var(--surface2);
+    padding: 8px 14px;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .bcm-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .bcm-dot.r { background: #ff5f57; }
+  .bcm-dot.y { background: #febc2e; }
+  .bcm-dot.g { background: var(--green); }
+  .bcm-title {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.62rem; color: var(--muted);
+    letter-spacing: 0.06em; margin-left: 6px;
+  }
+
+  .bcm-body { padding: 1rem; }
+
+  .bcm-section-title {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.58rem; color: var(--green);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 0.6rem; opacity: 0.7;
+  }
+
+  /* Cluster nodes grid */
+  .node-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; margin-bottom: 1rem; }
+  .node {
+    aspect-ratio: 1; border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Roboto Mono', monospace; font-size: 0.42rem;
+    font-weight: 500; transition: opacity 0.3s;
+  }
+  .node.online { background: rgba(118,185,0,0.15); color: var(--green); border: 1px solid rgba(118,185,0,0.3); }
+  .node.busy { background: rgba(255,165,0,0.1); color: #ffa500; border: 1px solid rgba(255,165,0,0.25); }
+  .node.idle { background: rgba(255,255,255,0.04); color: #555; border: 1px solid rgba(255,255,255,0.07); }
+  .node.error { background: rgba(255,80,80,0.1); color: #ff5050; border: 1px solid rgba(255,80,80,0.25); }
+
+  /* Mini bar charts */
+  .charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+
+  .mini-chart { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 0.6rem; }
+  .chart-label {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.52rem; color: var(--muted);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 0.4rem; display: flex; justify-content: space-between;
+  }
+  .chart-label span { color: var(--green); }
+
+  .bar-track { height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; margin-bottom: 3px; }
+  .bar-fill { height: 100%; border-radius: 2px; background: var(--green); }
+  .bar-fill.warn { background: #ffa500; }
+  .bar-fill.ok { background: var(--green); }
+
+  /* Job queue */
+  .job-queue { border: 1px solid var(--border); overflow: hidden; }
+  .job-header {
+    background: var(--surface2);
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    padding: 5px 8px;
+    font-family: 'Roboto Mono', monospace; font-size: 0.5rem;
+    color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  .job-row {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    padding: 5px 8px;
+    font-family: 'Roboto Mono', monospace; font-size: 0.52rem;
+    color: #666; border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .job-row:last-child { border-bottom: none; }
+  .job-row:hover { background: var(--green-dim); }
+  .job-row .jname { color: var(--white); }
+  .status-run { color: var(--green); }
+  .status-wait { color: #ffa500; }
+  .status-err { color: #ff5050; }
+
+  /* SECTIONS */
+  section { position: relative; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
+
+  .s-tag {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.65rem; color: var(--green);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .s-tag::before { content: '//'; opacity: 0.4; }
+
+  h2 {
+    font-family: 'Oxanium', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700; color: var(--white);
+    letter-spacing: -0.01em; line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  h2 .g { color: var(--green); }
+
+  /* ABOUT */
+  #about { padding: 8rem 0; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; margin-top: 3rem; align-items: start;
+  }
+
+  .about-text p { color: var(--muted); font-size: 0.9rem; line-height: 1.9; margin-bottom: 1rem; }
+  .about-text p strong { color: var(--white); font-weight: 500; }
+
+  /* BCM eval callout box */
+  .eval-box {
+    background: var(--green-dim);
+    border: 1px solid var(--border-green);
+    padding: 1.25rem 1.5rem; margin-top: 1.5rem;
+    border-left: 3px solid var(--green);
+  }
+  .eval-box-title {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.64rem; color: var(--green);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;
+  }
+  .eval-box p { color: var(--muted); font-size: 0.82rem; margin-bottom: 0; }
+
+  .pillars { display: flex; flex-direction: column; gap: 0; }
+
+  .pillar {
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 52px 1fr;
+    gap: 1rem; align-items: start;
+    transition: background 0.15s;
+  }
+  .pillar:last-child { border-bottom: 1px solid var(--border); }
+  .pillar:hover { background: var(--green-dim); padding-left: 0.5rem; }
+
+  .p-idx {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.6rem; color: var(--green);
+    letter-spacing: 0.1em; opacity: 0.6; padding-top: 3px;
+  }
+  .p-title { font-size: 0.85rem; font-weight: 600; color: var(--white); margin-bottom: 3px; }
+  .p-desc { font-size: 0.79rem; color: var(--muted); line-height: 1.6; }
+
+  /* EXPERIENCE */
+  #experience { padding: 8rem 0; background: var(--bg); }
+
+  .exp-list { margin-top: 3rem; }
+
+  .exp-item {
+    display: grid; grid-template-columns: 190px 1fr;
+    gap: 3rem; padding: 2.75rem 0;
+    border-top: 1px solid var(--border);
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .exp-item.visible { opacity: 1; transform: translateY(0); }
+  .exp-item:last-child { border-bottom: 1px solid var(--border); }
+
+  .exp-period {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.62rem; color: var(--green);
+    letter-spacing: 0.06em; margin-bottom: 0.4rem;
+  }
+  .exp-org {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.68rem; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.1em;
+  }
+
+  .exp-title {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 1.2rem; font-weight: 600; color: var(--white);
+    letter-spacing: 0.01em; margin-bottom: 1rem; line-height: 1.2;
+  }
+
+  .exp-pts { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .exp-pts li {
+    font-size: 0.86rem; color: var(--muted);
+    padding-left: 1.25rem; position: relative; line-height: 1.7;
+  }
+  .exp-pts li::before { content: '▸'; position: absolute; left: 0; color: var(--green); font-size: 0.65rem; top: 6px; }
+  .exp-pts li strong { color: var(--white); font-weight: 500; }
+
+  .exp-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 1rem; }
+  .chip {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.58rem; padding: 3px 10px;
+    border: 1px solid var(--border-green);
+    color: var(--green); letter-spacing: 0.06em;
+  }
+
+  /* PROJECTS */
+  #projects { padding: 8rem 0; background: var(--surface); border-top: 1px solid var(--border); }
+
+  .proj-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; margin-top: 3rem;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .proj-card {
+    background: var(--bg); padding: 2.25rem;
+    position: relative; overflow: hidden;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.5s, transform 0.5s, background 0.2s;
+  }
+  .proj-card.visible { opacity: 1; transform: translateY(0); }
+  .proj-card:hover { background: var(--surface2); }
+
+  .proj-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: var(--green);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s;
+  }
+  .proj-card:hover::after { transform: scaleX(1); }
+
+  /* Featured card spans full width */
+  .proj-card.featured {
+    grid-column: 1 / -1;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .proj-type {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.6rem; color: var(--green);
+    letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem;
+  }
+  .proj-title {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 1.25rem; font-weight: 700; color: var(--white);
+    letter-spacing: 0.01em; line-height: 1.2; margin-bottom: 0.75rem;
+  }
+  .proj-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.25rem; }
+
+  .proj-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 1.5rem; }
+  .stag {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.58rem; padding: 3px 9px;
+    border: 1px solid var(--border); color: #555;
+  }
+
+  .proj-metrics {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0.75rem; padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+  .metric { font-size: 0.74rem; color: var(--muted); }
+  .metric strong {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--green); display: block; line-height: 1;
+  }
+
+  /* BCM eval findings inside featured card */
+  .bcm-findings {
+    background: var(--surface);
+    border: 1px solid var(--border-green);
+    padding: 1.25rem; height: 100%;
+  }
+  .bcm-findings-title {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.6rem; color: var(--green);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 1rem; padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .finding {
+    display: flex; gap: 0.75rem; margin-bottom: 0.85rem; font-size: 0.8rem;
+  }
+  .finding:last-child { margin-bottom: 0; }
+  .finding-num {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.6rem; color: var(--green);
+    flex-shrink: 0; padding-top: 3px;
+  }
+  .finding-text { color: var(--muted); line-height: 1.6; }
+  .finding-text strong { color: var(--white); }
+
+  /* SKILLS */
+  #skills { padding: 8rem 0; background: var(--bg); }
+
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; margin-top: 3rem;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .sg {
+    background: var(--bg); padding: 1.75rem;
+    opacity: 0; transform: translateY(12px);
+    transition: opacity 0.4s, transform 0.4s, background 0.2s;
+  }
+  .sg.visible { opacity: 1; transform: translateY(0); }
+  .sg:hover { background: var(--surface); }
+
+  .sg-title {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.6rem; color: var(--green);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 1rem; padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sg-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+  .pill {
+    font-size: 0.72rem; color: var(--muted);
+    border: 1px solid var(--border); padding: 4px 10px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .pill:hover { color: var(--green); border-color: var(--border-green); }
+
+  /* CREDS */
+  #credentials { padding: 7rem 0; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+  .cred-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
+
+  .cert-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); }
+  .cert-item {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    opacity: 0; transform: translateX(-10px);
+    transition: opacity 0.4s, transform 0.4s, background 0.2s;
+  }
+  .cert-item:last-child { border-bottom: none; }
+  .cert-item.visible { opacity: 1; transform: translateX(0); }
+  .cert-item:hover { background: var(--green-dim); }
+  .cert-dot { width: 6px; height: 6px; background: var(--green); flex-shrink: 0; }
+  .cert-name { font-size: 0.82rem; font-weight: 500; color: var(--white); }
+  .cert-org { font-family: 'Roboto Mono', monospace; font-size: 0.6rem; color: var(--green); margin-top: 1px; }
+
+  /* Highlight GitLab */
+  .cert-item.featured-cert { background: var(--green-dim); border-left: 3px solid var(--green); }
+
+  .edu-stack { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--border); background: var(--border); }
+  .edu-card {
+    background: var(--bg); padding: 1.75rem;
+    border-left: 3px solid var(--green);
+    transition: background 0.2s;
+  }
+  .edu-card:hover { background: var(--surface2); }
+  .edu-deg {
+    font-family: 'Oxanium', sans-serif;
+    font-size: 1.05rem; font-weight: 600; color: var(--white); margin-bottom: 0.25rem;
+  }
+  .edu-school {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.62rem; color: var(--green); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.25rem;
+  }
+  .edu-meta { font-size: 0.75rem; color: var(--muted); }
+  .edu-gpa {
+    display: inline-block; margin-top: 0.6rem;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.62rem; color: var(--bg);
+    background: var(--green); padding: 2px 10px;
+  }
+
+  /* CONTACT */
+  #contact { padding: 9rem 0; background: var(--bg); text-align: center; position: relative; overflow: hidden; }
+
+  #contact::before {
+    content: 'HPC';
+    position: absolute;
+    font-family: 'Oxanium', sans-serif;
+    font-size: 28vw; font-weight: 800;
+    color: rgba(118,185,0,0.02);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  .contact-hl {
+    font-family: 'Oxanium', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 6rem);
+    font-weight: 800; color: var(--white);
+    line-height: 0.95; letter-spacing: -0.02em;
+    margin-bottom: 1.5rem; position: relative; z-index: 1;
+  }
+  .contact-hl .g { color: var(--green); }
+
+  .contact-sub { font-size: 0.9rem; color: var(--muted); max-width: 420px; margin: 0 auto 2.75rem; position: relative; z-index: 1; }
+
+  .contact-links { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; position: relative; z-index: 1; }
+  .cl {
+    display: flex; align-items: center; gap: 8px;
+    text-decoration: none; color: var(--white);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.08em;
+    border: 1px solid var(--border); padding: 10px 20px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .cl:hover { border-color: var(--green); color: var(--green); }
+  .cl svg { width: 14px; height: 14px; }
+
+  footer {
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 1.5rem 3rem;
+    display: flex; justify-content: space-between;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.6rem; color: #444; letter-spacing: 0.06em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  .hero-tag { opacity: 0; animation: fadeUp 0.6s ease forwards 0.1s; }
+  .hero-left h1 { opacity: 0; animation: fadeUp 0.7s ease forwards 0.2s; }
+  .hero-desc { opacity: 0; animation: fadeUp 0.6s ease forwards 0.35s; }
+  .hero-btns { opacity: 0; animation: fadeUp 0.6s ease forwards 0.48s; }
+  .bcm-mock { opacity: 0; animation: fadeUp 0.7s ease forwards 0.3s; }
+
+  .proj-card:nth-child(2) { transition-delay: 0.12s; }
+  .proj-card:nth-child(3) { transition-delay: 0.08s; }
+  .sg:nth-child(2) { transition-delay: 0.08s; }
+  .sg:nth-child(3) { transition-delay: 0.16s; }
+  .sg:nth-child(4) { transition-delay: 0.08s; }
+  .sg:nth-child(5) { transition-delay: 0.16s; }
+  .sg:nth-child(6) { transition-delay: 0.24s; }
+  .exp-item:nth-child(2) { transition-delay: 0.12s; }
+  .exp-item:nth-child(3) { transition-delay: 0.24s; }
+  .cert-item:nth-child(n+2) { transition-delay: 0.07s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    #hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .about-grid, .cred-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .proj-grid { grid-template-columns: 1fr; }
+    .proj-card.featured { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .container { padding: 0 1.5rem; }
+  }
+  @media (max-width: 600px) {
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">KV // HPC</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Software PM · AI & HPC Infrastructure · Santa Clara, CA</div>
+    <h1>INFRA-<br>STRUC-<br>TURE <span class="g">PM.</span><br><span class="dim">HPC</span> <span class="g">READY.</span></h1>
+    <p class="hero-desc">
+      <strong>I've deployed enterprise AI/HPC cluster management software.</strong> I know the node provisioning workflow, the job scheduling interface, and the integration gaps. I build the product layer that sits between engineers and their clusters — and I know what's broken.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-green">Case Studies →</a>
+      <a href="#contact" class="btn-border">Contact</a>
+    </div>
+  </div>
+
+  <!-- HPC cluster dashboard -->
+  <div class="hero-right">
+    <div class="bcm-mock">
+      <div class="bcm-titlebar">
+        <div class="bcm-dot r"></div>
+        <div class="bcm-dot y"></div>
+        <div class="bcm-dot g"></div>
+        <span class="bcm-title">HPC Cluster Manager — Cluster Overview</span>
+      </div>
+      <div class="bcm-body">
+        <div class="bcm-section-title">// Node Status (24 nodes)</div>
+        <div class="node-grid">
+          <div class="node online">n01</div><div class="node online">n02</div>
+          <div class="node busy">n03</div><div class="node busy">n04</div>
+          <div class="node online">n05</div><div class="node busy">n06</div>
+          <div class="node busy">n07</div><div class="node online">n08</div>
+          <div class="node online">n09</div><div class="node busy">n10</div>
+          <div class="node idle">n11</div><div class="node online">n12</div>
+          <div class="node online">n13</div><div class="node busy">n14</div>
+          <div class="node busy">n15</div><div class="node online">n16</div>
+          <div class="node error">n17</div><div class="node online">n18</div>
+          <div class="node idle">n19</div><div class="node idle">n20</div>
+          <div class="node online">n21</div><div class="node busy">n22</div>
+          <div class="node online">n23</div><div class="node online">n24</div>
+        </div>
+
+        <div class="charts-row">
+          <div class="mini-chart">
+            <div class="chart-label">GPU Util <span>87%</span></div>
+            <div class="bar-track"><div class="bar-fill ok" style="width:87%"></div></div>
+            <div class="bar-track"><div class="bar-fill ok" style="width:79%"></div></div>
+            <div class="bar-track"><div class="bar-fill warn" style="width:94%"></div></div>
+          </div>
+          <div class="mini-chart">
+            <div class="chart-label">Memory <span>71%</span></div>
+            <div class="bar-track"><div class="bar-fill ok" style="width:71%"></div></div>
+            <div class="bar-track"><div class="bar-fill ok" style="width:68%"></div></div>
+            <div class="bar-track"><div class="bar-fill ok" style="width:74%"></div></div>
+          </div>
+        </div>
+
+        <div class="bcm-section-title">// Job Queue</div>
+        <div class="job-queue">
+          <div class="job-header"><span>Job Name</span><span>User</span><span>Nodes</span><span>Status</span></div>
+          <div class="job-row"><span class="jname">llm-train-v4</span><span>team_a</span><span>8</span><span class="status-run">RUNNING</span></div>
+          <div class="job-row"><span class="jname">img-gen-batch</span><span>team_b</span><span>4</span><span class="status-run">RUNNING</span></div>
+          <div class="job-row"><span class="jname">finetune-bert</span><span>team_c</span><span>2</span><span class="status-wait">PENDING</span></div>
+          <div class="job-row"><span class="jname">inference-api</span><span>team_d</span><span>1</span><span class="status-err">FAILED</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="s-tag">About</div>
+    <h2>Infrastructure PM with <span class="g">hands-on HPC Cluster Mgmt</span></h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a <strong>Software Product Manager</strong> with 5+ years owning enterprise infrastructure software from conception through release. I've deployed enterprise AI/HPC cluster management software, evaluated its workflows, and identified specific product gaps — not as a user, but as a PM thinking about what to build next.</p>
+        <p>My background spans <strong>FINRA</strong> (75B+ daily transactions on financial infrastructure) and <strong>Cognizant Technology Solutions</strong> (12+ Fortune 500 enterprise clients). I've led third-party software integrations with Prometheus, Grafana, LDAP, SAML 2.0, and REST APIs — the exact stack that AI/HPC cluster managers integrate with.</p>
+        <p>I'm proficient in <strong>Kubernetes</strong> (EKS — pods, namespaces, resource quotas, persistent volumes, kubeconfig) and hold a <strong>GitLab CI/CD certification</strong> — both directly relevant to cluster manager Kubernetes integration and pipeline management capabilities.</p>
+
+        <div class="eval-box">
+          <div class="eval-box-title">// Cluster Manager Hands-On Evaluation</div>
+          <p>Deployed an enterprise AI/HPC cluster manager to Ubuntu 22.04 VM (8 vCPU, 32GB RAM). Evaluated node provisioning workflow, cluster health dashboard, LDAP user management, and job scheduling interface. Documented 3 UX friction points and 2 API documentation gaps for third-party monitoring stack integration. Built an integration roadmap proposal connecting the cluster manager REST API to Prometheus/Grafana.</p>
+        </div>
+      </div>
+
+      <div class="pillars">
+        <div class="pillar">
+          <div class="p-idx">01</div>
+          <div>
+            <div class="p-title">Cluster & Infrastructure PM</div>
+            <div class="p-desc">Product lifecycle ownership for AI and HPC infrastructure software — from feature conception through enterprise release, with deep understanding of cluster management workflows.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="p-idx">02</div>
+          <div>
+            <div class="p-title">Third-Party Integration Ownership</div>
+            <div class="p-desc">Led integration roadmaps for Prometheus/Grafana, LDAP/SAML 2.0, and REST APIs. API contract design, versioning strategy, and rollback procedures for enterprise customers.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="p-idx">03</div>
+          <div>
+            <div class="p-title">Kubernetes & GitLab Fluency</div>
+            <div class="p-desc">Kubernetes (EKS) cluster concepts — pods, namespaces, resource quotas, persistent volumes. GitLab CI/CD certified. Engages credibly with engineering on infrastructure architecture decisions.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="p-idx">04</div>
+          <div>
+            <div class="p-title">Cross-Functional Alignment</div>
+            <div class="p-desc">Captures product feedback from enterprise customers across architecture, IT administration, and datacenter operations teams. Translates into structured feature proposals with RICE scoring and build-vs-buy evaluation.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="s-tag">Experience</div>
+    <h2>Career <span class="g">history</span></h2>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-period">May 2025 – Dec 2025</div>
+          <div class="exp-org">FINRA USA</div>
+        </div>
+        <div>
+          <div class="exp-title">Software PM — Enterprise Infrastructure Platform</div>
+          <ul class="exp-pts">
+            <li>Led <strong>third-party software integrations</strong> — integrated REST API connectors with 3 external providers, reducing upstream data latency by 38% across 8 downstream services; defined SLA requirements, API versioning strategy, and rollback protocols with architecture and engineering</li>
+            <li>Owned <strong>product roadmap planning</strong> across architecture, marketing, sales, and engineering — translated feedback from 12+ enterprise accounts into structured feature proposals; maintained roadmap in product management system with dependencies, milestones, and release criteria</li>
+            <li>Applied <strong>Kubernetes resource management concepts</strong> (namespaces, resource quotas, persistent volumes) and GitLab CI/CD pipeline knowledge to engage credibly with engineering on infrastructure decisions</li>
+          </ul>
+          <div class="exp-chips">
+            <span class="chip">REST API Integration</span><span class="chip">Kubernetes (EKS)</span><span class="chip">GitLab CI/CD</span><span class="chip">Release Planning</span><span class="chip">75B+ Txns</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-period">Jul 2021 – Aug 2024</div>
+          <div class="exp-org">Cognizant Technology Solutions</div>
+        </div>
+        <div>
+          <div class="exp-title">Senior Software PM — Infrastructure & API Integration</div>
+          <ul class="exp-pts">
+            <li>Led integration roadmap for <strong>monitoring stack connectors (Prometheus, Grafana), authentication systems (LDAP, SAML 2.0),</strong> and data pipeline APIs for 12+ Fortune 500 enterprise clients; drove 84% adoption in 6 months</li>
+            <li>Collaborated with <strong>SRE and datacenter administration teams</strong> to define operational runbooks and rollback procedures; implemented features from conception through release with UAT and release readiness checklists</li>
+            <li>Led <strong>build-vs-buy evaluation for 4 third-party tools</strong>; applied RICE scoring; demonstrated ability to quickly learn Kubernetes cluster management and container orchestration concepts</li>
+          </ul>
+          <div class="exp-chips">
+            <span class="chip">Prometheus & Grafana</span><span class="chip">LDAP & SAML 2.0</span><span class="chip">SRE Collaboration</span><span class="chip">Datacenter Ops</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-period">Jun 2020 – Jul 2021</div>
+          <div class="exp-org">Cognizant Technology Solutions</div>
+        </div>
+        <div>
+          <div class="exp-title">Associate Software PM — Infrastructure Integration</div>
+          <ul class="exp-pts">
+            <li>Documented integration requirements for 5 external software connectors; collaborated with engineering on API contract design, error handling, and versioning; applied Kubernetes deployment concepts from AWS EKS coursework</li>
+            <li>Quickly learned <strong>cluster management, infrastructure management, and datacenter administration</strong> concepts to engage credibly with technical stakeholders; reduced integration delivery time 29%</li>
+          </ul>
+          <div class="exp-chips">
+            <span class="chip">API Contract Design</span><span class="chip">Infrastructure Management</span><span class="chip">Agile</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="s-tag">Projects</div>
+    <h2>Case <span class="g">studies</span></h2>
+    <div class="proj-grid">
+
+      <!-- Featured cluster evaluation -->
+      <div class="proj-card featured visible">
+        <div>
+          <div class="proj-type">Self-Initiated · PM Evaluation</div>
+          <div class="proj-title">AI/HPC Cluster Manager Evaluation & Integration Roadmap Proposal</div>
+          <p class="proj-desc">Deployed enterprise AI/HPC cluster management software to Ubuntu 22.04 VM. Evaluated the node provisioning workflow, cluster health dashboard, LDAP user management, and multi-tenant job scheduling interface. Developed integration roadmap connecting the cluster manager REST API to Prometheus/Grafana monitoring stack.</p>
+          <div class="proj-stack">
+            <span class="stag">AI/HPC Cluster Mgr</span><span class="stag">Ubuntu 22.04</span><span class="stag">Kubernetes (EKS)</span><span class="stag">Prometheus</span><span class="stag">Grafana</span><span class="stag">LDAP</span><span class="stag">REST API</span><span class="stag">GitLab CI/CD</span>
+          </div>
+          <div class="proj-metrics">
+            <div class="metric"><strong>3</strong>UX friction points identified</div>
+            <div class="metric"><strong>2</strong>API doc gaps documented</div>
+            <div class="metric"><strong>4</strong>Tool surfaces consolidated</div>
+            <div class="metric"><strong>1</strong>Integration roadmap proposed</div>
+          </div>
+        </div>
+        <div class="bcm-findings">
+          <div class="bcm-findings-title">// PM Evaluation Findings</div>
+          <div class="finding">
+            <div class="finding-num">F.01</div>
+            <div class="finding-text"><strong>Multi-tenant job queue UX:</strong> No visual differentiation between user-visible and admin-only queue views — operators context-switch unnecessarily between views to monitor team jobs.</div>
+          </div>
+          <div class="finding">
+            <div class="finding-num">F.02</div>
+            <div class="finding-text"><strong>Monitoring stack API gap:</strong> REST API documentation lacks authentication flow examples for Prometheus scrape endpoint integration — forces each enterprise customer to independently reverse-engineer the integration.</div>
+          </div>
+          <div class="finding">
+            <div class="finding-num">F.03</div>
+            <div class="finding-text"><strong>LDAP error messaging:</strong> LDAP misconfiguration errors surface in logs only — no dashboard-level alert or remediation guidance for cluster admins.</div>
+          </div>
+          <div class="finding">
+            <div class="finding-num">OPP</div>
+            <div class="finding-text"><strong>Integration opportunity:</strong> Connecting the cluster manager REST API to standard Prometheus/Grafana stack would reduce operator context-switching across 4+ tool surfaces in a typical HPC deployment.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-type">Lead PM · 18 Months</div>
+        <div class="proj-title">Enterprise Infrastructure Platform: Third-Party Integrations</div>
+        <p class="proj-desc">Led third-party integration roadmap for monitoring stack (Prometheus, Grafana), authentication (LDAP, SAML 2.0), and data pipeline APIs. Applied Kubernetes cluster management knowledge to evaluate deployment architectures for enterprise customers.</p>
+        <div class="proj-stack">
+          <span class="stag">Kubernetes (EKS)</span><span class="stag">REST APIs</span><span class="stag">LDAP/SAML</span><span class="stag">Prometheus</span><span class="stag">Grafana</span><span class="stag">Jira</span>
+        </div>
+        <div class="proj-metrics">
+          <div class="metric"><strong>+44%</strong>Integration delivery</div>
+          <div class="metric"><strong>+84%</strong>Enterprise adoption</div>
+          <div class="metric"><strong>+41%</strong>Release predictability</div>
+          <div class="metric"><strong>100%</strong>On-time (4 releases)</div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-type">PM · 10 Months</div>
+        <div class="proj-title">Enterprise Software Product Lifecycle: Conception Through Release</div>
+        <p class="proj-desc">Defined MVP scope for 6 major feature releases. Led QA review cycles, UAT with enterprise customers, and release readiness checklists. Collaborated with SRE and datacenter administration teams to define operational runbooks. Applied datacenter administration knowledge to evaluate customer deployment architectures.</p>
+        <div class="proj-stack">
+          <span class="stag">Enterprise Software</span><span class="stag">SRE Collab</span><span class="stag">Datacenter Admin</span><span class="stag">UAT</span><span class="stag">Agile</span>
+        </div>
+        <div class="proj-metrics">
+          <div class="metric"><strong>+36%</strong>Delivery efficiency</div>
+          <div class="metric"><strong>−29%</strong>Integration time</div>
+          <div class="metric"><strong>+33%</strong>Alignment</div>
+          <div class="metric"><strong>+100%</strong>Business value</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="s-tag">Skills</div>
+    <h2>Capabilities & <span class="g">expertise</span></h2>
+    <div class="skills-grid">
+      <div class="sg">
+        <div class="sg-title">// AI/HPC Cluster Mgmt</div>
+        <div class="sg-pills">
+          <span class="pill">AI/HPC Cluster Mgr (Deployed)</span><span class="pill">Node Provisioning</span><span class="pill">Cluster Health Monitoring</span><span class="pill">Job Scheduling</span><span class="pill">Multi-tenant Queue</span>
+        </div>
+      </div>
+      <div class="sg">
+        <div class="sg-title">// Kubernetes & Infrastructure</div>
+        <div class="sg-pills">
+          <span class="pill">Kubernetes EKS</span><span class="pill">Pods & Namespaces</span><span class="pill">Resource Quotas</span><span class="pill">Persistent Volumes</span><span class="pill">kubeconfig</span><span class="pill">Container Orchestration</span>
+        </div>
+      </div>
+      <div class="sg">
+        <div class="sg-title">// Third-Party Integrations</div>
+        <div class="sg-pills">
+          <span class="pill">REST API Integration</span><span class="pill">LDAP & SAML 2.0</span><span class="pill">Prometheus & Grafana</span><span class="pill">API Contract Design</span><span class="pill">Versioning Strategy</span>
+        </div>
+      </div>
+      <div class="sg">
+        <div class="sg-title">// Product Lifecycle & Tools</div>
+        <div class="sg-pills">
+          <span class="pill">Conception Through Release</span><span class="pill">Jira & Confluence</span><span class="pill">RICE Prioritization</span><span class="pill">UAT & Release Readiness</span><span class="pill">Rollback Procedures</span>
+        </div>
+      </div>
+      <div class="sg">
+        <div class="sg-title">// Customer & Partner</div>
+        <div class="sg-pills">
+          <span class="pill">Enterprise Customer Feedback</span><span class="pill">Architecture Reviews</span><span class="pill">SRE Collaboration</span><span class="pill">Datacenter Ops</span><span class="pill">IT Administration</span>
+        </div>
+      </div>
+      <div class="sg">
+        <div class="sg-title">// Agility & Learning</div>
+        <div class="sg-pills">
+          <span class="pill">GitLab CI/CD (Certified)</span><span class="pill">AWS Cloud Practitioner</span><span class="pill">Fast-Paced Execution</span><span class="pill">Quick Technical Learning</span><span class="pill">Multiple Parallel Tasks</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section id="credentials">
+  <div class="container">
+    <div class="s-tag">Credentials</div>
+    <h2>Certs & <span class="g">education</span></h2>
+    <div class="cred-grid">
+      <div>
+        <div style="font-family:'Roboto Mono',monospace;font-size:0.6rem;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1rem;">// Certifications</div>
+        <div class="cert-list">
+          <div class="cert-item featured-cert"><div class="cert-dot"></div><div><div class="cert-name">GitLab CI/CD Certified</div><div class="cert-org">GitLab · Relevant for cluster CI/CD</div></div></div>
+          <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">AWS Cloud Practitioner</div><div class="cert-org">Amazon Web Services</div></div></div>
+          <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Salesforce Certified AI Associate</div><div class="cert-org">Salesforce</div></div></div>
+          <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Salesforce Admin (ADM 201)</div><div class="cert-org">Salesforce</div></div></div>
+          <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Salesforce Platform App Builder</div><div class="cert-org">Salesforce</div></div></div>
+          <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Pega Certified System Architect</div><div class="cert-org">Pegasystems</div></div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Roboto Mono',monospace;font-size:0.6rem;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1rem;">// Education</div>
+        <div class="edu-stack">
+          <div class="edu-card">
+            <div class="edu-deg">M.S. Information Technology</div>
+            <div class="edu-school">University of Denver</div>
+            <div class="edu-meta">Aug 2024 – May 2026 · Denver, CO</div>
+            <div class="edu-gpa">GPA 3.97 / 4.0</div>
+          </div>
+          <div class="edu-card">
+            <div class="edu-deg">B.E. Computer Science</div>
+            <div class="edu-school">Anna University</div>
+            <div class="edu-meta">Aug 2017 – May 2021</div>
+            <div class="edu-gpa">GPA 3.8 / 4.0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-hl">READY TO<br>BUILD FOR <span class="g">HPC.</span></div>
+    <p class="contact-sub">Software PM specializing in AI & HPC infrastructure. Cluster manager deployed and evaluated. Integration gaps documented. Santa Clara, CA.</p>
+    <div class="contact-links">
+      <a href="mailto:kiruthikavenkat2704@gmail.com" class="cl">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        kiruthikavenkat2704@gmail.com
+      </a>
+      <a href="tel:+17208135590" class="cl">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        (+1) 720-813-5590
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Kiruthika Venkatesan · Software PM, AI & HPC Infrastructure</span>
+  <span>kiruthikavenkat2704@gmail.com · Santa Clara, CA</span>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.exp-item, .proj-card:not(.featured), .sg, .cert-item').forEach(el => io.observe(el));
+
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+    links.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--green)' : ''; });
+  }, { passive: true });
+
+  // Animate node statuses
+  const nodes = document.querySelectorAll('.node.busy');
+  setInterval(() => {
+    nodes.forEach(n => { n.style.opacity = Math.random() > 0.3 ? '1' : '0.6'; });
+  }, 2000);
+</script>
+</body>
+</html>
